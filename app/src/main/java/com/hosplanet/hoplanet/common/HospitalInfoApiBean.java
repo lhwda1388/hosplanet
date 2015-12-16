@@ -1,4 +1,4 @@
-package com.hosplanet.hosplanet.common;
+package com.hosplanet.hoplanet.common;
 
 /**
  * Created by hyunwoo-Lee on 2015-12-16.
