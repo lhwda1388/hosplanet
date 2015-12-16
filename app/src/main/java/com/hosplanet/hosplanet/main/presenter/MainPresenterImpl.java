@@ -2,7 +2,12 @@ package com.hosplanet.hosplanet.main.presenter;
 
 import android.app.Activity;
 
+import com.hosplanet.hoplanet.api.AsyncResponse;
+import com.hosplanet.hoplanet.api.HospitalInfoApiBean;
+import com.hosplanet.hoplanet.api.HospitalInfoAsyncTask;
 import com.hosplanet.hosplanet.main.model.MainModel;
+
+import java.util.List;
 
 
 /**
@@ -24,9 +29,10 @@ public class MainPresenterImpl implements MainPresenter {
     }
 
     @Override
-    public void onConfirm() {
-        if(view != null){
-
+    public void getList(HospitalInfoApiBean hospitalInfoApiBean) {
+        if(view != null) {
+            view.getHostPitalList(hospitalInfoApiBean);
         }
     }
+
 }

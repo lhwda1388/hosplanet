@@ -1,15 +1,12 @@
-package com.hosplanet.hoplanet.common;
-
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
+package com.hosplanet.hoplanet.api;
 
 /**
  * Created by hyunwoo-Lee on 2015-12-16.
  */
 public class HospitalInfoApiBean{
 
-    private static final String defaultApiUrl = "http://openapi.hira.or.kr/openapi/service/hospInfoService/getHospBasisList";
-    private static final String serviceKey = "FZLcTmcSjp4YadLBB3BmNMJ7qlgAWal3D3TMoZfhTfjw58kaqN5OhuORY1CVt5VApbt6jVUbQ6ul5dT1qrYXBQ%3D%3D";
+    public static final String serviceKey = "";
+    private static final String defaultApiUrl = "http://openapi.hira.or.kr/openapi/service/hospInfoService/getHospBasisList"; //https://www.data.go.kr/ 공공데이터 포탈
     private String type;
     private String apiUrl;
     private Integer pageNo;          //페이지번호 in,out
@@ -49,6 +46,7 @@ public class HospitalInfoApiBean{
     }
 
     public String getApiUrl() {
+        apiUrl = apiUrl == null ? defaultApiUrl : apiUrl;
         return apiUrl;
     }
 
