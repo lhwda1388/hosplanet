@@ -1,10 +1,16 @@
 package com.hosplanet.hoplanet.common;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 /**
  * Created by hyunwoo-Lee on 2015-12-16.
  */
-public class HospitalInfoApiBean {
-    public static final String defaultApiUrl = "http://openapi.hira.or.kr/openapi/service/hospInfoService/getHospBasisList ";
+public class HospitalInfoApiBean{
+
+    private static final String defaultApiUrl = "http://openapi.hira.or.kr/openapi/service/hospInfoService/getHospBasisList";
+    private static final String serviceKey = "FZLcTmcSjp4YadLBB3BmNMJ7qlgAWal3D3TMoZfhTfjw58kaqN5OhuORY1CVt5VApbt6jVUbQ6ul5dT1qrYXBQ%3D%3D";
+    private String type;
     private String apiUrl;
     private Integer pageNo;          //페이지번호 in,out
     private Integer numOfRows;      //한페이지 결과수 in ,검색건수 out
@@ -33,6 +39,14 @@ public class HospitalInfoApiBean {
     private Integer resdntCnt;   //레지던트 인원수 out
     private Integer sdrCnt;      //전문의 인원수 out
     private Integer distance;    //거리 out
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public String getApiUrl() {
         return apiUrl;
