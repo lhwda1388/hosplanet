@@ -3,6 +3,7 @@ package com.hosplanet.hoplanet.api;
 import android.util.Log;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
@@ -14,6 +15,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -58,6 +60,37 @@ public class HospitalInfoApiClient {
             }
         }
         return sb.toString();
+    }
+    public static HospitalInfoApiBean getJObjectFromHBean(JSONObject item) throws JSONException {
+
+        HospitalInfoApiBean hBean = new HospitalInfoApiBean();
+
+        Log.i("item", item.toString());
+
+        hBean.setAddr(item.getString("addr"));
+        hBean.setClCd(item.getString("clCd"));
+        hBean.setClCdNm(item.getString("clCdNm"));
+        hBean.setDistance(item.getInt("distance"));
+        hBean.setDrTotCnt(item.getInt("drTotCnt"));
+        hBean.setEmdongNm(item.getString("emdongNm"));
+        hBean.setEstbDd(item.getString("estbDd"));
+        hBean.setGdrCnt(item.getInt("gdrCnt"));
+        hBean.setHospUrl(item.getString("hospUrl"));
+        hBean.setIntnCnt(item.getInt("intnCnt"));
+        hBean.setPostNo(item.getString("postNo"));
+        hBean.setResdntCnt(item.getInt("resdntCnt"));
+        hBean.setSdrCnt(item.getInt("sdrCnt"));
+        hBean.setSgguCd(item.getString("sgguCd"));
+        hBean.setSgguCdNm(item.getString("sgguCdNm"));
+        hBean.setSidoCd(item.getString("sidoCd"));
+        hBean.setSidoCdNm(item.getString("sidoCdNm"));
+        hBean.setTelno(item.getString("telno"));
+        hBean.setxPos(item.getDouble("XPos"));
+        hBean.setyPos(item.getDouble("YPos"));
+        hBean.setYadmnm(item.getString("yadmNm"));
+        hBean.setYkiho(item.getString("ykiho").trim());
+
+        return hBean;
     }
 }
 
