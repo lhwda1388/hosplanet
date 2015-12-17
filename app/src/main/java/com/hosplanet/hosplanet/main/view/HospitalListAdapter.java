@@ -1,7 +1,9 @@
 package com.hosplanet.hosplanet.main.view;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.text.Layout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,7 @@ import android.widget.TextView;
 
 import com.hosplanet.hoplanet.api.HospitalInfoApiBean;
 import com.hosplanet.hosplanet.R;
+import com.hosplanet.hosplanet.main.presenter.MainPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +22,15 @@ import java.util.List;
  */
 public class HospitalListAdapter extends ArrayAdapter<HospitalInfoApiBean>{
     List<HospitalInfoApiBean> list = new ArrayList<HospitalInfoApiBean>();
-
+    MainPresenter mainPresenter  = null;
     public HospitalListAdapter(Context context, int resource) {
         super(context, resource);
+    }
+    public void setMainPresenter(MainPresenter mainPresenter){
+        this.mainPresenter = mainPresenter;
+    }
+    public MainPresenter getMainPresenter(){
+        return this.mainPresenter;
     }
 
     @Override
@@ -36,7 +45,7 @@ public class HospitalListAdapter extends ArrayAdapter<HospitalInfoApiBean>{
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         View v = convertView;
         if(v == null){
             LayoutInflater inflater = (LayoutInflater)this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -44,7 +53,20 @@ public class HospitalListAdapter extends ArrayAdapter<HospitalInfoApiBean>{
         }
         HospitalInfoApiBean data = getItem(position);
         TextView hosInfo = (TextView)v.findViewById(R.id.hosName);
+        TextView hosUrl = (TextView)v.findViewById(R.id.hosUrl);
         hosInfo.setText(data.getClCdNm());
+        hosUrl.setText(data.getHospUrl());
+        hosUrl.setPaintFlags(hosUrl.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+
+        hosUrl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("CLICKURL", getItem(position).getHospUrl());
+                mainPresenter.goUrl(getItem(position).getHospUrl());
+            }
+
+        });
+
         return v;
     }
 }

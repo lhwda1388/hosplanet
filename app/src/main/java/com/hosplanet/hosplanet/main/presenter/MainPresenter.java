@@ -11,8 +11,10 @@ public interface MainPresenter {
     void setView(MainPresenter.View view);
 
     void getList(HospitalInfoApiBean hospitalInfoApiBean);
+    void goUrl(String url);
 
     public interface View {
         void getHostPitalList(HospitalInfoApiBean hospitalInfoApiBean);
+        void goUrl(String url);
     }
 }

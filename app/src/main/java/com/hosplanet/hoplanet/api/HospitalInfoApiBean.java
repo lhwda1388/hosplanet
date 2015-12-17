@@ -5,7 +5,7 @@ package com.hosplanet.hoplanet.api;
  */
 public class HospitalInfoApiBean{
 
-    public static final String serviceKey = "";
+    public static final String serviceKey = "BD0Udhhzjoi2pND%2FH0oUmre5pdWpX1Q8QrDtcautYIjqirvhw9UDx5sgcpuVc1d344rYl8G03ibyywWqB5qP%2Fg%3D%3D";
     private static final String defaultApiUrl = "http://openapi.hira.or.kr/openapi/service/hospInfoService/getHospBasisList"; //https://www.data.go.kr/ 공공데이터 포탈
     private String type;
     private String apiUrl;

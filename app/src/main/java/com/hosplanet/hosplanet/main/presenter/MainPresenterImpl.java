@@ -35,4 +35,10 @@ public class MainPresenterImpl implements MainPresenter {
         }
     }
 
+    @Override
+    public void goUrl(String  url) {
+        if(view != null) {
+            view.goUrl(url);
+        }
+    }
 }

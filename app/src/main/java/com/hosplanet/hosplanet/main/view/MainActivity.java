@@ -1,10 +1,13 @@
 package com.hosplanet.hosplanet.main.view;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ArrayAdapter;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hosplanet.hoplanet.api.AsyncResponse;
@@ -18,21 +21,22 @@ import com.hosplanet.hosplanet.main.presenter.MainPresenterImpl;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class MainActivity extends AppCompatActivity implements MainPresenter.View{
     private MainPresenter mainPresenter;
     private ListView hosListView;
     private HospitalListAdapter hospitalListAdapter;
+    private TextView hosUrl;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         HospitalInfoApiBean hBean = new HospitalInfoApiBean();
         mainPresenter = new MainPresenterImpl(MainActivity.this);
         mainPresenter.setView(this);
         mainPresenter.getList(hBean);
+
+
     }
 
     @Override
@@ -84,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
                         "            \"emdongNm\": \"신내동\",                                                                          "+
                         "            \"estbDd\": \"20110314\",                                                                          "+
                         "            \"gdrCnt\": \"4\",                                                                                 "+
-                        "            \"hospUrl\": \"http://www.seoulmc.or.kr\",                                                         "+
+                        "            \"hospUrl\": \"http://www.naver.com\",                                                         "+
                         "            \"intnCnt\": \"30\",                                                                               "+
                         "            \"postNo\": \"131865\",                                                                            "+
                         "            \"resdntCnt\": \"57\",                                                                             "+
@@ -126,6 +130,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
 
                     hosListView = (ListView)findViewById(R.id.hosListView);
                     hospitalListAdapter = new HospitalListAdapter(getApplicationContext(),R.layout.hos_info);
+                    hospitalListAdapter.setMainPresenter(mainPresenter);
                     hosListView.setAdapter(hospitalListAdapter);
                     for(int i=0; i<jsonArray.length(); i++) {
                         JSONObject item = jsonArray.getJSONObject(i);
@@ -139,5 +144,18 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
             }
         });
         h.execute(hospitalInfoApiBean);
+
+    }
+
+    @Override
+    public void goUrl(String url) {
+        Log.i("MAINGOURL",url);
+        if(url.equals("") || url == null){
+            Toast.makeText(getApplicationContext(),"NOT FOUND URL.",Toast.LENGTH_LONG).show();
+        }else{
+            Intent intent = new Intent(this,HospUrlActivity.class);
+            intent.putExtra("com.hosplanet.HOSPURL", url);
+            startActivity(intent);
+        }
     }
 }
