@@ -24,7 +24,7 @@ public class HospitalInfoApiClient {
     public JSONObject getHostPitalList(HospitalInfoApiBean hospitalInfoApiBean) throws Exception {
         List hostPitalList = null;
         HospitalInfoApiBean hBean = new HospitalInfoApiBean();
-        String serviceKey= "?"+URLEncoder.encode("ServiceKey","UTF-8")+"="+HospitalInfoApiBean.serviceKey;
+        String serviceKey= "?"+URLEncoder.encode("ServiceKey","UTF-8")+"="+URLEncoder.encode(HospitalInfoApiBean.serviceKey,"UTF-8");
         hBean.setAddr("json");
         String urlString = hBean.getApiUrl()+serviceKey+"&_type=json";
         StringBuilder urlBuilder = new StringBuilder(urlString);

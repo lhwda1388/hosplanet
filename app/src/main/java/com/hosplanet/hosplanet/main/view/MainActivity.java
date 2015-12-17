@@ -2,6 +2,8 @@ package com.hosplanet.hosplanet.main.view;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.hosplanet.hoplanet.api.AsyncResponse;
@@ -33,12 +35,17 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
         HospitalInfoAsyncTask h = new HospitalInfoAsyncTask(new AsyncResponse(){
             @Override
             public void processFinish(JSONObject jsonObject) throws Exception {
+
+                Log.i("JSONOBJECT",jsonObject.toString());
                 JSONObject header = jsonObject.getJSONObject("response").getJSONObject("header");
                 String resCode = header.get("resultCode").toString();
                 String resMsg = header.get("resultMsg").toString();
+
                 if("00".equals(resCode)){
                     JSONObject body   = jsonObject.getJSONObject("response").getJSONObject("body");
-                    JSONArray jsonArray = body.getJSONArray("items");
+                    JSONArray jsonArray = body.getJSONObject("items").getJSONArray("item");
+                    Log.i("arraLength",Integer.toString(jsonArray.length()));
+
                 }else{
                     Toast.makeText(getApplicationContext(), resMsg, Toast.LENGTH_LONG).show();
                 }
