@@ -21,7 +21,7 @@ import java.util.List;
  */
 public class HospitalInfoApiClient {
 
-    public List<HospitalInfoApiBean> getHostPitalList(HospitalInfoApiBean hospitalInfoApiBean) throws Exception {
+    public JSONObject getHostPitalList(HospitalInfoApiBean hospitalInfoApiBean) throws Exception {
         List hostPitalList = null;
         HospitalInfoApiBean hBean = new HospitalInfoApiBean();
         String serviceKey= "?"+URLEncoder.encode("ServiceKey","UTF-8")+"="+HospitalInfoApiBean.serviceKey;
@@ -34,9 +34,8 @@ public class HospitalInfoApiClient {
         HttpURLConnection urlConnection = (HttpURLConnection)url.openConnection();
         InputStream in = new BufferedInputStream(urlConnection.getInputStream());
         JSONObject jObject = new JSONObject(getStringFromInputStream(in));
-        Log.i("JSONRESULT",jObject.get("response").toString());
 
-        return null;
+        return jObject;
     }
     private String getStringFromInputStream(InputStream in){
         BufferedReader br = null;
