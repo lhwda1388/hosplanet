@@ -28,7 +28,7 @@ public class HospitalInfoApiClient {
         HospitalInfoApiBean hBean = new HospitalInfoApiBean();
         String serviceKey= "?"+URLEncoder.encode("ServiceKey","UTF-8")+"="+URLEncoder.encode(HospitalInfoApiBean.serviceKey,"UTF-8");
         hBean.setAddr("json");
-        String urlString = hBean.getApiUrl()+serviceKey+"&_type=json";
+        String urlString = HospitalInfoApiBean.apiUrl+serviceKey+"&_type=json";
         StringBuilder urlBuilder = new StringBuilder(urlString);
 
         Log.i("URL", urlBuilder.toString());
