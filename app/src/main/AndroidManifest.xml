@@ -20,6 +20,15 @@
             </intent-filter>
         </activity>
         <activity android:name="com.hosplanet.main.view.HospUrlActivity"></activity>
+
+        <receiver android:name="com.hosplanet.common.NetworkReceiver">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
+                <action android:name="android.intent.action.PHONE_STATE"/>
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>

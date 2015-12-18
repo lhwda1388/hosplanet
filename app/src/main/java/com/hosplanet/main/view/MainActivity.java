@@ -141,7 +141,6 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
 
             }
         });
-        h.execute(hospitalInfoApiBean);
 
     }
 
