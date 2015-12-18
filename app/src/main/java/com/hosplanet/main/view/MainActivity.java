@@ -16,6 +16,7 @@ import com.hosplanet.api.HospitalInfoApiBean;
 import com.hosplanet.api.HospitalInfoApiClient;
 import com.hosplanet.api.HospitalInfoAsyncTask;
 import com.hosplanet.R;
+import com.hosplanet.hosinfo.view.HosMainActivity;
 import com.hosplanet.main.presenter.MainPresenter;
 import com.hosplanet.main.presenter.MainPresenterImpl;
 
@@ -187,6 +188,9 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
 
                             HospitalInfoApiBean hBean = hospitalListAdapter.getItem(position);
                             Log.i("요양번호", hBean.getYkiho());
+                            Intent intent = new Intent(MainActivity.this, HosMainActivity.class);
+                            intent.putExtra("com.hoplanet.ykiho",hBean.getYkiho());
+                            startActivity(intent);
                         }
                     });
 
