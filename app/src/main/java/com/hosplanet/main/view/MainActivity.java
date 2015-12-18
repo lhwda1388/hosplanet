@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
         HospitalInfoApiBean hBean = new HospitalInfoApiBean();
         mainPresenter = new MainPresenterImpl(MainActivity.this);
         mainPresenter.setView(this);
-        System.out.print("00000000000000000000000000000000000000000000000000000000000000000");
         mainPresenter.getList(hBean);
 
 
@@ -40,7 +39,6 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
 
     @Override
     public void getHostPitalList(HospitalInfoApiBean hospitalInfoApiBean) {
-        System.out.print("-----------------------------------------------------------------------");
         HospitalInfoAsyncTask h = new HospitalInfoAsyncTask(new AsyncResponse(){
             @Override
             public void processFinish(JSONObject jsonObject) throws Exception {
@@ -139,11 +137,12 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
 
                 }else{
                     Toast.makeText(getApplicationContext(), resMsg, Toast.LENGTH_LONG).show();
+
                 }
 
             }
         });
-
+        h.execute(hospitalInfoApiBean);
     }
 
     @Override
