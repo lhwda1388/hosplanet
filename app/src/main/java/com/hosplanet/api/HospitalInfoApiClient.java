@@ -1,5 +1,6 @@
 package com.hosplanet.api;
 
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.hosplanet.common.util.HttpUtil;
@@ -7,8 +8,11 @@ import com.hosplanet.common.util.HttpUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by hyunwoo-Lee on 2015-12-16.
@@ -22,10 +26,40 @@ public class HospitalInfoApiClient {
         String serviceKey= "?"+URLEncoder.encode("ServiceKey","UTF-8")+"="+URLEncoder.encode(HospitalInfoApiBean.serviceKey,"UTF-8");
         String urlString = HospitalInfoApiBean.apiUrl+serviceKey+"&_type=json";
         StringBuilder urlBuilder = new StringBuilder(urlString);
+
+        appendString(urlBuilder, "pageNo", hospitalInfoApiBean.getPageNo() ,"UTF-8");
+        appendString(urlBuilder, "numOfRows", hospitalInfoApiBean.getNumOfRows() ,"UTF-8");
+        appendString(urlBuilder, "sidoCd", hospitalInfoApiBean.getSidoCd() ,"UTF-8");
+        appendString(urlBuilder, "sidoCdNm", hospitalInfoApiBean.getSidoCdNm() ,"UTF-8");
+        appendString(urlBuilder, "sgguCd", hospitalInfoApiBean.getSgguCd() ,"UTF-8");
+        appendString(urlBuilder, "sgguCdNm", hospitalInfoApiBean.getSgguCdNm() ,"UTF-8");
+        appendString(urlBuilder, "emdongNm", hospitalInfoApiBean.getEmdongNm() ,"UTF-8");
+        appendString(urlBuilder, "yadmNm", hospitalInfoApiBean.getYadmnm() ,"UTF-8");
+        appendString(urlBuilder, "zipCd", hospitalInfoApiBean.getZipCd() ,"UTF-8");
+        appendString(urlBuilder, "clCd", hospitalInfoApiBean.getClCd() ,"UTF-8");
+        appendString(urlBuilder, "dgsbjtCd", hospitalInfoApiBean.getDgsbjtCd() ,"UTF-8");
+        appendString(urlBuilder, "xPos", hospitalInfoApiBean.getxPos() ,"UTF-8");
+        appendString(urlBuilder, "yPos", hospitalInfoApiBean.getyPos() ,"UTF-8");
+        appendString(urlBuilder, "radius", hospitalInfoApiBean.getRadius() ,"UTF-8");
+
         Log.i("URL", urlBuilder.toString());
         return HttpUtil.getHttpUrlData(urlBuilder.toString());
     }
-
+    private void appendString(StringBuilder builder, String key, Object value, String charset) throws UnsupportedEncodingException {
+        String enCodeValue = null;
+        if(value != null) {
+            if (value instanceof Integer) {
+                enCodeValue = Integer.toString(((Integer) value).intValue());
+            } else if (value instanceof Double) {
+                enCodeValue = Double.toString(((Double) value).doubleValue());
+            } else {
+                enCodeValue = (String) value;
+            }
+        }
+        if(!TextUtils.isEmpty(enCodeValue)){
+            builder.append("&" + URLEncoder.encode(key, charset) + "=" + URLEncoder.encode(enCodeValue, charset));
+        }
+    }
     public static HospitalInfoApiBean getJObjectFromHBean(JSONObject item) throws JSONException {
 
         HospitalInfoApiBean hBean = new HospitalInfoApiBean();

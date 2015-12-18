@@ -8,8 +8,8 @@ public class HospitalInfoApiBean{
     public static final String serviceKey = "BD0Udhhzjoi2pND%2FH0oUmre5pdWpX1Q8QrDtcautYIjqirvhw9UDx5sgcpuVc1d344rYl8G03ibyywWqB5qP%2Fg%3D%3D";
     public static final String apiUrl = "http://openapi.hira.or.kr/openapi/service/hospInfoService/getHospBasisList"; //https://www.data.go.kr/ 공공데이터 포탈
     private String type;
-    private Integer pageNo;          //페이지번호 in,out
-    private Integer numOfRows;      //한페이지 결과수 in ,검색건수 out
+    private Integer pageNo = 1;          //페이지번호 in,out
+    private Integer numOfRows = 10;     //한페이지 결과수 in ,검색건수 out
     private String sidoCd;          //시도코드 in,out
     private String sidoCdNm;        //시도명 out
     private String sgguCd;          //시군구코드 in,out

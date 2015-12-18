@@ -25,9 +25,9 @@ public class MainPresenterImpl implements MainPresenter {
     }
 
     @Override
-    public void getList() {
+    public void getList(Object object) {
         if(view != null) {
-            view.getHostPitalList();
+            view.getList(object);
         }
     }
 
