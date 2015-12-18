@@ -8,7 +8,7 @@ import android.net.NetworkInfo;
  * Created by hyunwoo-Lee on 2015-12-18.
  */
 public class NetworkUtil {
-    public static final int NETWORK_STATUS_NOT_CONNECTED=0,NETWORK_STAUS_WIFI=1,NETWORK_STATUS_MOBILE=2;
+    public static final int NETWORK_STATUS_NOT_CONNECTED=0,NETWORK_STATUS_WIFI=1,NETWORK_STATUS_MOBILE=2;
 
 
     public static int getNetworkStatus(Context context){
@@ -16,7 +16,7 @@ public class NetworkUtil {
         NetworkInfo networkInfo = cm.getActiveNetworkInfo();
         if(null != networkInfo){
             if(networkInfo.getType() == ConnectivityManager.TYPE_WIFI){
-                return NETWORK_STAUS_WIFI;
+                return NETWORK_STATUS_WIFI;
             }else if(networkInfo.getType() == ConnectivityManager.TYPE_MOBILE){
                 return NETWORK_STATUS_MOBILE;
             }

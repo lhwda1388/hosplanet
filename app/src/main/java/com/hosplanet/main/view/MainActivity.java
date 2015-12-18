@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
         HospitalInfoApiBean hBean = new HospitalInfoApiBean();
         mainPresenter = new MainPresenterImpl(MainActivity.this);
         mainPresenter.setView(this);
+        System.out.print("00000000000000000000000000000000000000000000000000000000000000000");
         mainPresenter.getList(hBean);
 
 
