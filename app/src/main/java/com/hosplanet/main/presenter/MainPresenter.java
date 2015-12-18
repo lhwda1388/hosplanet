@@ -8,11 +8,11 @@ import com.hosplanet.api.HospitalInfoApiBean;
 public interface MainPresenter {
     void setView(MainPresenter.View view);
 
-    void getList(HospitalInfoApiBean hospitalInfoApiBean);
+    void getList();
     void goUrl(String url);
 
     public interface View {
-        void getHostPitalList(HospitalInfoApiBean hospitalInfoApiBean);
+        void getHostPitalList();
         void goUrl(String url);
     }
 }
