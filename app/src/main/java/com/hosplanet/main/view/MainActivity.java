@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
         mainPresenter.getList();
 
         searchView = (SearchView)findViewById(R.id.searchView);
-        searchView.setQueryHint("병원이름을 입력해주세요.");
+        searchView.setQueryHint(getString(R.string.searchVIewHint));
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
