@@ -16,8 +16,10 @@ public class NetworkReceiver extends BroadcastReceiver{
     public void onReceive(Context context, Intent intent) {
         int status = NetworkUtil.getNetworkStatus(context);
         Log.e("NETWORK RECEIVER","NETWORK RECEIVER");
+        Log.i("intentAction", intent.getAction());
+        Log.i("status",Integer.toString(status));
         if (!"android.intent.action.BOOT_COMPLETED".equals(intent.getAction())) {
-            if(status==NetworkUtil.NETWORK_STATUS_NOT_CONNECTED){
+            if(status == NetworkUtil.NETWORK_STATUS_NOT_CONNECTED){
                 Toast.makeText(context, "네트워크 상태가 불안정 합니다.", Toast.LENGTH_LONG).show();
             }
         }
