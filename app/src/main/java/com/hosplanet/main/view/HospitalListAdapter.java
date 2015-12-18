@@ -10,7 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.hosplanet.api.HospitalInfoApiBean;
-import com.hosplanet.hosplanet.R;
+import com.hosplanet.R;
 import com.hosplanet.main.presenter.MainPresenter;
 
 import java.util.ArrayList;

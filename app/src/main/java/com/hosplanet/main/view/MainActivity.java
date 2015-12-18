@@ -12,7 +12,7 @@ import com.hosplanet.api.AsyncResponse;
 import com.hosplanet.api.HospitalInfoApiBean;
 import com.hosplanet.api.HospitalInfoApiClient;
 import com.hosplanet.api.HospitalInfoAsyncTask;
-import com.hosplanet.hosplanet.R;
+import com.hosplanet.R;
 import com.hosplanet.main.presenter.MainPresenter;
 import com.hosplanet.main.presenter.MainPresenterImpl;
 
@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
 
     @Override
     public void getHostPitalList(HospitalInfoApiBean hospitalInfoApiBean) {
+        System.out.print("-----------------------------------------------------------------------");
         HospitalInfoAsyncTask h = new HospitalInfoAsyncTask(new AsyncResponse(){
             @Override
             public void processFinish(JSONObject jsonObject) throws Exception {

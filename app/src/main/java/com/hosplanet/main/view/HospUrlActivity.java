@@ -9,7 +9,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 
-import com.hosplanet.hosplanet.R;
+import com.hosplanet.R;
 import com.hosplanet.main.presenter.HospUrlPresenter;
 import com.hosplanet.main.presenter.HospUrlPresenterImpl;
 
