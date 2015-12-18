@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.SearchView;
 import android.util.Log;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hosplanet.api.AsyncResponse;
@@ -19,6 +20,7 @@ import com.hosplanet.main.presenter.MainPresenter;
 import com.hosplanet.main.presenter.MainPresenterImpl;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity implements MainPresenter.View{
@@ -94,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
                         "            \"YPos\": \"37.6132113197367\",                                                                    "+
                         "            \"yadmNm\": \"서울특별시서울의료원\",                                                              "+
                         "            \"ykiho\": \"                                                                                      "+
-                        "                        JDQ4MTg4MSM1MSMkMSMkMCMkODkkMzgxMzUxIzExIyQyIyQ3IyQwMCQyNjEyMjIjNjEjJDEjJDgjJDgz       "+
+                        "                        JDQ4MTg4MSM1MSMkMSMkMCMkODkkMzgxMzUxIzExIyQyIyQ3IyQwMCQyNjEyMjIjNjEjJDEjJDgjJDgz1       "+
                         "                        \"                                                                                     "+
                         "          },                                                                                                   "+
                         "          {                                                                                                    "+
@@ -120,7 +122,33 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
                         "            \"YPos\": \"37.6132113197367\",                                                                    "+
                         "            \"yadmNm\": \"서울특별시서울의료원\",                                                              "+
                         "            \"ykiho\": \"                                                                                      "+
-                        "                        JDQ4MTg4MSM1MSMkMSMkMCMkODkkMzgxMzUxIzExIyQyIyQ3IyQwMCQyNjEyMjIjNjEjJDEjJDgjJDgz       "+
+                        "                        JDQ4MTg4MSM1MSMkMSMkMCMkODkkMzgxMzUxIzExIyQyIyQ3IyQwMCQyNjEyMjIjNjEjJDEjJDgjJDgz2       "+
+                        "                        \"                                                                                     "+
+                        "          },                                                                                                    "+
+                        "          {                                                                                                    "+
+                        "            \"addr\": \"서울특별시 중랑구 신내로 156 (신내동)\",                                               "+
+                        "            \"clCd\": \"11\",                                                                                  "+
+                        "            \"clCdNm\": \"종합병원3\",                                                                          "+
+                        "            \"distance\": \"0\",                                                                               "+
+                        "            \"drTotCnt\": \"188\",                                                                             "+
+                        "            \"emdongNm\": \"신내동\",                                                                          "+
+                        "            \"estbDd\": \"20110314\",                                                                          "+
+                        "            \"gdrCnt\": \"4\",                                                                                 "+
+                        "            \"hospUrl\": \"http://www.daum.net\",                                                         "+
+                        "            \"intnCnt\": \"30\",                                                                               "+
+                        "            \"postNo\": \"131865\",                                                                            "+
+                        "            \"resdntCnt\": \"57\",                                                                             "+
+                        "            \"sdrCnt\": \"97\",                                                                                "+
+                        "            \"sgguCd\": \"110019\",                                                                            "+
+                        "            \"sgguCdNm\": \"중랑구\",                                                                          "+
+                        "            \"sidoCd\": \"110000\",                                                                            "+
+                        "            \"sidoCdNm\": \"서울\",                                                                            "+
+                        "            \"telno\": \"02-2276-7000\",                                                                       "+
+                        "            \"XPos\": \"127.09854004628151\",                                                                  "+
+                        "            \"YPos\": \"37.6132113197367\",                                                                    "+
+                        "            \"yadmNm\": \"서울특별시서울의료원\",                                                              "+
+                        "            \"ykiho\": \"                                                                                      "+
+                        "                        JDQ4MTg4MSM1MSMkMSMkMCMkODkkMzgxMzUxIzExIyQyIyQ3IyQwMCQyNjEyMjIjNjEjJDEjJDgjJDgz3       "+
                         "                        \"                                                                                     "+
                         "          }                                                                                                    "+
                         "        ]                                                                                                      "+
@@ -156,8 +184,9 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
                     hosListView.setOnItemClickListener(new ListView.OnItemClickListener(){
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            Log.i("LISTPOSITION",Integer.toString(position));
-                            Log.i("LISTPOSITION",Long.toString(id));
+
+                            HospitalInfoApiBean hBean = hospitalListAdapter.getItem(position);
+                            Log.i("요양번호", hBean.getYkiho());
                         }
                     });
 
