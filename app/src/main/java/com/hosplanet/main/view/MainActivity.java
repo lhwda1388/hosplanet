@@ -1,22 +1,20 @@
-package com.hosplanet.hosplanet.main.view;
+package com.hosplanet.main.view;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.hosplanet.hoplanet.api.AsyncResponse;
-import com.hosplanet.hoplanet.api.HospitalInfoApiBean;
-import com.hosplanet.hoplanet.api.HospitalInfoApiClient;
-import com.hosplanet.hoplanet.api.HospitalInfoAsyncTask;
+import com.hosplanet.api.AsyncResponse;
+import com.hosplanet.api.HospitalInfoApiBean;
+import com.hosplanet.api.HospitalInfoApiClient;
+import com.hosplanet.api.HospitalInfoAsyncTask;
 import com.hosplanet.hosplanet.R;
-import com.hosplanet.hosplanet.main.presenter.MainPresenter;
-import com.hosplanet.hosplanet.main.presenter.MainPresenterImpl;
+import com.hosplanet.main.presenter.MainPresenter;
+import com.hosplanet.main.presenter.MainPresenterImpl;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

@@ -1,8 +1,7 @@
-package com.hosplanet.hosplanet.main.view;
+package com.hosplanet.main.view;
 
 import android.content.Context;
 import android.graphics.Paint;
-import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,9 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.hosplanet.hoplanet.api.HospitalInfoApiBean;
+import com.hosplanet.api.HospitalInfoApiBean;
 import com.hosplanet.hosplanet.R;
-import com.hosplanet.hosplanet.main.presenter.MainPresenter;
+import com.hosplanet.main.presenter.MainPresenter;
 
 import java.util.ArrayList;
 import java.util.List;

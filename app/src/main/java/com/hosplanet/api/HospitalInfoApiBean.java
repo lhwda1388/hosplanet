@@ -1,4 +1,4 @@
-package com.hosplanet.hoplanet.api;
+package com.hosplanet.api;
 
 /**
  * Created by hyunwoo-Lee on 2015-12-16.

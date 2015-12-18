@@ -1,6 +1,4 @@
-package com.hosplanet.hosplanet.main.presenter;
-
-import com.hosplanet.hoplanet.api.HospitalInfoApiBean;
+package com.hosplanet.main.presenter;
 
 /**
  * Created by hyunwoo-Lee on 2015-12-15.

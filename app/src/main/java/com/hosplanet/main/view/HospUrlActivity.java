@@ -1,8 +1,6 @@
-package com.hosplanet.hosplanet.main.view;
+package com.hosplanet.main.view;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,11 +8,10 @@ import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.hosplanet.hosplanet.R;
-import com.hosplanet.hosplanet.main.presenter.HospUrlPresenter;
-import com.hosplanet.hosplanet.main.presenter.HospUrlPresenterImpl;
+import com.hosplanet.main.presenter.HospUrlPresenter;
+import com.hosplanet.main.presenter.HospUrlPresenterImpl;
 
 public class HospUrlActivity extends AppCompatActivity implements HospUrlPresenter.View{
     private Button button;

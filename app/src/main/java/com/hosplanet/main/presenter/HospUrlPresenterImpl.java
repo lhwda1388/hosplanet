@@ -1,9 +1,6 @@
-package com.hosplanet.hosplanet.main.presenter;
+package com.hosplanet.main.presenter;
 
 import android.app.Activity;
-
-import com.hosplanet.hoplanet.api.HospitalInfoApiBean;
-import com.hosplanet.hosplanet.main.model.MainModel;
 
 
 /**

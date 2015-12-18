@@ -1,4 +1,4 @@
-package com.hosplanet.hoplanet.api;
+package com.hosplanet.api;
 
 import org.json.JSONObject;
 

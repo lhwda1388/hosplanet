@@ -1,11 +1,8 @@
-package com.hosplanet.hoplanet.api;
+package com.hosplanet.api;
 
 import android.os.AsyncTask;
 
-import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.List;
 
 /**
  * Created by hyunwoo-Lee on 2015-12-16.
