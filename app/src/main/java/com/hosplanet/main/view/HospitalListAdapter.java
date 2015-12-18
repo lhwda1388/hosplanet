@@ -48,7 +48,7 @@ public class HospitalListAdapter extends ArrayAdapter<HospitalInfoApiBean>{
         View v = convertView;
         if(v == null){
             LayoutInflater inflater = (LayoutInflater)this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            v = inflater.inflate(R.layout.hos_info,parent,false);
+            v = inflater.inflate(R.layout.hoslist_info,parent,false);
         }
         HospitalInfoApiBean data = getItem(position);
         TextView hosInfo = (TextView)v.findViewById(R.id.hosName);
