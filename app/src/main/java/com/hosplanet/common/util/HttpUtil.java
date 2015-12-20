@@ -10,6 +10,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 
 /**
@@ -17,12 +18,34 @@ import java.net.URL;
  */
 public class HttpUtil {
 
-    public static JSONObject getHttpUrlData(String argUrl) throws IOException, JSONException {
-        URL url = new URL(argUrl);
-        HttpURLConnection urlConnection = (HttpURLConnection)url.openConnection();
-        InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+    public static JSONObject getHttpUrlData(String argUrl){
+        URL url = null;
+        HttpURLConnection urlConnection = null;
+        InputStream in = null;
+        JSONObject jObject = null;
+        try {
+            url = new URL(argUrl);
+            urlConnection = (HttpURLConnection) url.openConnection();
+            in = new BufferedInputStream(urlConnection.getInputStream());
+            jObject = new JSONObject(getStringFromInputStream(in));
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } finally{
+            if(in != null){
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            urlConnection.disconnect();
 
-        JSONObject jObject = new JSONObject(getStringFromInputStream(in));
+        }
+
 
         return jObject;
     }

@@ -54,6 +54,7 @@ public class HospitalListAdapter extends ArrayAdapter<HospitalInfoApiBean>{
         HospitalInfoApiBean data = getItem(position);
         TextView hosInfo = (TextView)v.findViewById(R.id.hosName);
         TextView hosUrl = (TextView)v.findViewById(R.id.hosUrl);
+
         hosInfo.setText(data.getClCdNm());
         hosUrl.setText(data.getHospUrl());
         hosUrl.setPaintFlags(hosUrl.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);

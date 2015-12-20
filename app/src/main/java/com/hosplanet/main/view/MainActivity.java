@@ -65,110 +65,15 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
         HospitalInfoAsyncTask h = new HospitalInfoAsyncTask(new AsyncResponse(){
             @Override
             public void processFinish(JSONObject jsonObject) throws Exception {
-                String jjj=         "{                                                                                                              "+
-                        "  \"response\": {                                                                                              "+
-                        "    \"header\": {                                                                                              "+
-                        "      \"resultCode\": \"00\",                                                                                  "+
-                        "      \"resultMsg\": \"NORMAL SERVICE.\"                                                                       "+
-                        "    },                                                                                                         "+
-                        "    \"body\": {                                                                                                "+
-                        "      \"items\": {                                                                                             "+
-                        "        \"item\": [                                                                                            "+
-                        "          {                                                                                                    "+
-                        "            \"addr\": \"서울특별시 중랑구 신내로 156 (신내동)\",                                               "+
-                        "            \"clCd\": \"11\",                                                                                  "+
-                        "            \"clCdNm\": \"종합병원\",                                                                          "+
-                        "            \"distance\": \"0\",                                                                               "+
-                        "            \"drTotCnt\": \"188\",                                                                             "+
-                        "            \"emdongNm\": \"신내동\",                                                                          "+
-                        "            \"estbDd\": \"20110314\",                                                                          "+
-                        "            \"gdrCnt\": \"4\",                                                                                 "+
-                        "            \"hospUrl\": \"http://www.seoulmc.or.kr\",                                                         "+
-                        "            \"intnCnt\": \"30\",                                                                               "+
-                        "            \"postNo\": \"131865\",                                                                            "+
-                        "            \"resdntCnt\": \"57\",                                                                             "+
-                        "            \"sdrCnt\": \"97\",                                                                                "+
-                        "            \"sgguCd\": \"110019\",                                                                            "+
-                        "            \"sgguCdNm\": \"중랑구\",                                                                          "+
-                        "            \"sidoCd\": \"110000\",                                                                            "+
-                        "            \"sidoCdNm\": \"서울\",                                                                            "+
-                        "            \"telno\": \"02-2276-7000\",                                                                       "+
-                        "            \"XPos\": \"127.09854004628151\",                                                                  "+
-                        "            \"YPos\": \"37.6132113197367\",                                                                    "+
-                        "            \"yadmNm\": \"서울특별시서울의료원\",                                                              "+
-                        "            \"ykiho\": \"                                                                                      "+
-                        "                        JDQ4MTg4MSM1MSMkMSMkMCMkODkkMzgxMzUxIzExIyQyIyQ3IyQwMCQyNjEyMjIjNjEjJDEjJDgjJDgz1       "+
-                        "                        \"                                                                                     "+
-                        "          },                                                                                                   "+
-                        "          {                                                                                                    "+
-                        "            \"addr\": \"서울특별시 중랑구 신내로 156 (신내동)\",                                               "+
-                        "            \"clCd\": \"11\",                                                                                  "+
-                        "            \"clCdNm\": \"종합병원2\",                                                                          "+
-                        "            \"distance\": \"0\",                                                                               "+
-                        "            \"drTotCnt\": \"188\",                                                                             "+
-                        "            \"emdongNm\": \"신내동\",                                                                          "+
-                        "            \"estbDd\": \"20110314\",                                                                          "+
-                        "            \"gdrCnt\": \"4\",                                                                                 "+
-                        "            \"hospUrl\": \"http://www.naver.com\",                                                         "+
-                        "            \"intnCnt\": \"30\",                                                                               "+
-                        "            \"postNo\": \"131865\",                                                                            "+
-                        "            \"resdntCnt\": \"57\",                                                                             "+
-                        "            \"sdrCnt\": \"97\",                                                                                "+
-                        "            \"sgguCd\": \"110019\",                                                                            "+
-                        "            \"sgguCdNm\": \"중랑구\",                                                                          "+
-                        "            \"sidoCd\": \"110000\",                                                                            "+
-                        "            \"sidoCdNm\": \"서울\",                                                                            "+
-                        "            \"telno\": \"02-2276-7000\",                                                                       "+
-                        "            \"XPos\": \"127.09854004628151\",                                                                  "+
-                        "            \"YPos\": \"37.6132113197367\",                                                                    "+
-                        "            \"yadmNm\": \"서울특별시서울의료원\",                                                              "+
-                        "            \"ykiho\": \"                                                                                      "+
-                        "                        JDQ4MTg4MSM1MSMkMSMkMCMkODkkMzgxMzUxIzExIyQyIyQ3IyQwMCQyNjEyMjIjNjEjJDEjJDgjJDgz2       "+
-                        "                        \"                                                                                     "+
-                        "          },                                                                                                    "+
-                        "          {                                                                                                    "+
-                        "            \"addr\": \"서울특별시 중랑구 신내로 156 (신내동)\",                                               "+
-                        "            \"clCd\": \"11\",                                                                                  "+
-                        "            \"clCdNm\": \"종합병원3\",                                                                          "+
-                        "            \"distance\": \"0\",                                                                               "+
-                        "            \"drTotCnt\": \"188\",                                                                             "+
-                        "            \"emdongNm\": \"신내동\",                                                                          "+
-                        "            \"estbDd\": \"20110314\",                                                                          "+
-                        "            \"gdrCnt\": \"4\",                                                                                 "+
-                        "            \"hospUrl\": \"http://www.daum.net\",                                                         "+
-                        "            \"intnCnt\": \"30\",                                                                               "+
-                        "            \"postNo\": \"131865\",                                                                            "+
-                        "            \"resdntCnt\": \"57\",                                                                             "+
-                        "            \"sdrCnt\": \"97\",                                                                                "+
-                        "            \"sgguCd\": \"110019\",                                                                            "+
-                        "            \"sgguCdNm\": \"중랑구\",                                                                          "+
-                        "            \"sidoCd\": \"110000\",                                                                            "+
-                        "            \"sidoCdNm\": \"서울\",                                                                            "+
-                        "            \"telno\": \"02-2276-7000\",                                                                       "+
-                        "            \"XPos\": \"127.09854004628151\",                                                                  "+
-                        "            \"YPos\": \"37.6132113197367\",                                                                    "+
-                        "            \"yadmNm\": \"서울특별시서울의료원\",                                                              "+
-                        "            \"ykiho\": \"                                                                                      "+
-                        "                        JDQ4MTg4MSM1MSMkMSMkMCMkODkkMzgxMzUxIzExIyQyIyQ3IyQwMCQyNjEyMjIjNjEjJDEjJDgjJDgz3       "+
-                        "                        \"                                                                                     "+
-                        "          }                                                                                                    "+
-                        "        ]                                                                                                      "+
-                        "      },                                                                                                       "+
-                        "      \"numOfRows\": \"10\",                                                                                   "+
-                        "      \"pageNo\": \"1\",                                                                                       "+
-                        "      \"totalCount\": \"1\"                                                                                    "+
-                        "    }                                                                                                          "+
-                        "  }                                                                                                            "+
-                        "}																												";
-                jsonObject = new JSONObject(jjj);
+
                 Log.i("JSONOBJECT",jsonObject.toString());
                 JSONObject header = jsonObject.getJSONObject("response").getJSONObject("header");
                 String resCode  = header.get("resultCode").toString();
                 String resMsg = header.get("resultMsg").toString();
 
                 if("00".equals(resCode)){
-                    JSONObject body = jsonObject.getJSONObject("response").getJSONObject("body");
-                    JSONArray jsonArray = body.getJSONObject("items").getJSONArray("item");
+                    JSONObject body = jsonObject.optJSONObject("response").optJSONObject("body");
+                    JSONArray jsonArray = body.optJSONObject("items").getJSONArray("item");
                     String numOfRows = body.get("numOfRows").toString();
                     String pageNo = body.get("pageNo").toString();
                     String totalCount = body.get("totalCount").toString();
