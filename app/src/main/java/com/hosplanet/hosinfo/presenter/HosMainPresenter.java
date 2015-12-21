@@ -1,5 +1,6 @@
 package com.hosplanet.hosinfo.presenter;
 
+import com.hosplanet.api.HospitalInfoApiBean;
 import com.hosplanet.main.presenter.MainPresenter;
 
 /**
@@ -8,8 +9,9 @@ import com.hosplanet.main.presenter.MainPresenter;
 public interface HosMainPresenter {
     void setView(HosMainPresenter.View view);
 
+    void getInfo(HospitalInfoApiBean hospitalInfoApiBean);
     public interface View {
-
+        void getInfo(HospitalInfoApiBean hospitalInfoApiBean);
     }
 }
 

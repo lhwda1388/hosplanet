@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.SearchView;
 import android.util.Log;
 import android.widget.ListView;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
     private ListView hosListView;
     private HospitalListAdapter hospitalListAdapter;
     private SearchView searchView;
+    private Button btnAllList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,10 +42,11 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
 
         searchView = (SearchView)findViewById(R.id.searchView);
         searchView.setQueryHint(getString(R.string.searchVIewHint));
-        searchView.setQuery("가톨릭대학교인천성모병원",true);
+        searchView.setQuery("가톨릭대학교인천성모병원", true);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                Log.i("Query: ", query);
                 mainPresenter.getList(query);
                 return true;
             }
@@ -54,6 +57,13 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
             }
         });
 
+        btnAllList = (Button)findViewById(R.id.btnAllList);
+        btnAllList.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                mainPresenter.getList(null);
+            }
+        });
     }
 
     @Override
@@ -62,6 +72,8 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
         if(object != null){
             Log.i("SEARCHVIEWTEXT",(String)object);
             hospitalInfoApiBean.setYadmnm((String) object);
+        }else{
+            hospitalInfoApiBean.setYadmnm(null);
         }
         HospitalInfoAsyncTask h = new HospitalInfoAsyncTask(new AsyncResponse(){
             @Override
@@ -111,9 +123,9 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                             HospitalInfoApiBean hBean = hospitalListAdapter.getItem(position);
-                            Log.i("요양번호", hBean.getYkiho());
                             Intent intent = new Intent(MainActivity.this, HosMainActivity.class);
-                            intent.putExtra("com.hoplanet.ykiho",hBean.getYkiho());
+                            intent.putExtra("com.hoplanet.yadmNm", hBean.getYadmnm());
+                            intent.putExtra("com.hoplanet.clCd", hBean.getClCd());
                             startActivity(intent);
                         }
                     });

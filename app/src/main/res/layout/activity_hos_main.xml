@@ -8,5 +8,43 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.hosplanet.hosinfo.view.HosMainActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:id="@+id/imageView"
+            android:background="@drawable/penguins2">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:id="@+id/hosInfoName"
+                android:textColor="@color/colorWhite"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                />
+        </RelativeLayout>
 
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@+id/imageView"
+            android:weightSum="1">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="병원정보"
+                android:layout_weight="0.5"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="리뷰"
+                android:layout_weight="0.5"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
 </RelativeLayout>

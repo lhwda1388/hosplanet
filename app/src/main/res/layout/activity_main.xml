@@ -19,10 +19,16 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_weight="1"
+        android:layout_weight="0.8"
         android:id="@+id/searchView"
         />
-
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.2"
+        android:id="@+id/btnAllList"
+        android:text="전체목록"
+        />
     </LinearLayout>
     <ListView
         android:layout_width="wrap_content"

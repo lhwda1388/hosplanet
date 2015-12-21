@@ -46,6 +46,7 @@ public class HospitalInfoApiClient {
         appendString(urlBuilder, "clCd", hospitalInfoApiBean.getClCd() ,"UTF-8" ,"&");
         appendString(urlBuilder, "dgsbjtCd", hospitalInfoApiBean.getDgsbjtCd() ,"UTF-8" ,"&");
         appendString(urlBuilder, "radius", hospitalInfoApiBean.getRadius() ,"UTF-8" ,"&");
+        appendString(urlBuilder, "ykiho", hospitalInfoApiBean.getYkiho() ,"UTF-8" ,"&");
 
         Log.i("URL", urlBuilder.toString());
         return HttpUtil.getHttpUrlData(urlBuilder.toString());
