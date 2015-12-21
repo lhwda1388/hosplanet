@@ -74,40 +74,30 @@ public class HospitalInfoApiClient {
             String key = keys.next();
 
             try{
-                Field[] fields = hBeanCls.getDeclaredFields();
-                for (Field field : fields){
-                    String fieldName = field.getName();
-                    field.setAccessible(true);
+                Method[] methods = hBeanCls.getMethods();
 
-                    if(key.toUpperCase().equals(fieldName.toUpperCase())) {
-                        Method[] methods = hBeanCls.getMethods();
+                for(Method method : methods){
+                    String methodName = method.getName();
 
-                        for(Method method : methods){
-                            String methodName = method.getName();
+                    if(methodName.substring(0, 3).equals("set")){
 
-                            if(methodName.substring(0, 3).equals("set")){
+                        if(methodName.toUpperCase().equals(("set"+key).toUpperCase())){
+                            method.setAccessible(true);
 
-                                if(methodName.toUpperCase().equals(("set"+fieldName).toUpperCase())){
-                                    method.setAccessible(true);
-
-                                    try {
-                                        method.invoke(hBean, new Object[]{item.get(key)});
-                                    }catch(java.lang.IllegalArgumentException e){
-                                        method.invoke(hBean, new Object[]{item.getString(key)});
-                                    }
-
-                                    method.setAccessible(false);
-                                    break;
-                                }
-
+                            try {
+                                method.invoke(hBean, new Object[]{item.get(key)});
+                            }catch(java.lang.IllegalArgumentException e){
+                                method.invoke(hBean, new Object[]{item.getString(key)});
                             }
 
+                            method.setAccessible(false);
+                            break;
                         }
-                        break;
 
                     }
 
                 }
+
             }catch (Exception e){
                 e.printStackTrace();
             }

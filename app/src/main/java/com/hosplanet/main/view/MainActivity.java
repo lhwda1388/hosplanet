@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
 
                 if("00".equals(resCode)){
                     JSONObject body = jsonObject.optJSONObject("response").optJSONObject("body");
+                    Log.i("itemlength",Integer.toString(body.optJSONObject("items").length()));
                     JSONArray jsonArray = body.optJSONObject("items").getJSONArray("item");
                     String numOfRows = body.get("numOfRows").toString();
                     String pageNo = body.get("pageNo").toString();
