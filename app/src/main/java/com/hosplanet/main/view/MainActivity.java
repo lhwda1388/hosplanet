@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
 
         searchView = (SearchView)findViewById(R.id.searchView);
         searchView.setQueryHint(getString(R.string.searchVIewHint));
+        searchView.setQuery("가톨릭대학교인천성모병원",true);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -66,28 +67,45 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
             @Override
             public void processFinish(JSONObject jsonObject) throws Exception {
 
-                Log.i("JSONOBJECT",jsonObject.toString());
+
                 JSONObject header = jsonObject.getJSONObject("response").getJSONObject("header");
                 String resCode  = header.get("resultCode").toString();
                 String resMsg = header.get("resultMsg").toString();
-
+                Log.i("JSONOBJECT",jsonObject.toString());
                 if("00".equals(resCode)){
                     JSONObject body = jsonObject.optJSONObject("response").optJSONObject("body");
-                    Log.i("itemlength",Integer.toString(body.optJSONObject("items").length()));
-                    JSONArray jsonArray = body.optJSONObject("items").getJSONArray("item");
+                    JSONObject items = body.optJSONObject("items");
+                    JSONArray jsonArray = null;
+                    if(items == null){
+                        Toast.makeText(getApplicationContext(), R.string.noList, Toast.LENGTH_LONG).show();
+                    }else{
+                        jsonArray = items.optJSONArray("item");
+                    }
+
+
                     String numOfRows = body.get("numOfRows").toString();
                     String pageNo = body.get("pageNo").toString();
                     String totalCount = body.get("totalCount").toString();
-                    Log.i("arraLength",Integer.toString(jsonArray.length()));
 
                     hosListView = (ListView)findViewById(R.id.hosListView);
                     hospitalListAdapter = new HospitalListAdapter(getApplicationContext(),R.layout.hoslist_info);
                     hospitalListAdapter.setMainPresenter(mainPresenter);
                     hosListView.setAdapter(hospitalListAdapter);
-                    for(int i=0; i<jsonArray.length(); i++) {
-                        JSONObject item = jsonArray.getJSONObject(i);
+                    if(jsonArray == null){
+                        JSONObject item = null;
+                        if (items != null) {
+                            item = items.optJSONObject("item");
+                        }
                         hospitalListAdapter.add(HospitalInfoApiClient.getJObjectFromHBean(item));
+                    }else{
+                        Log.i("arraLength",Integer.toString(jsonArray.length()));
+                        for(int i=0; i<jsonArray.length(); i++) {
+                            JSONObject item = jsonArray.optJSONObject(i);
+                            hospitalListAdapter.add(HospitalInfoApiClient.getJObjectFromHBean(item));
+                        }
+
                     }
+
                     hosListView.setOnItemClickListener(new ListView.OnItemClickListener(){
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

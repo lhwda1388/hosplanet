@@ -69,6 +69,7 @@ public class HospitalInfoApiClient {
 
         HospitalInfoApiBean hBean = new HospitalInfoApiBean();
         Class hBeanCls = hBean.getClass();
+        if(item == null) return hBean;
         Iterator<String> keys = item.keys();
         while (keys.hasNext()) {
             String key = keys.next();

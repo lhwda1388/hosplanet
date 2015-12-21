@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Hosplanet</string>
     <string name="searchVIewHint">병원이름을 입력해주세요.</string>
+    <string name="noList">데이터가 없습니다.</string>
 </resources>
