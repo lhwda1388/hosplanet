@@ -69,20 +69,25 @@ public class HospitalInfoApiClient {
 
         HospitalInfoApiBean hBean = new HospitalInfoApiBean();
         Class hBeanCls = hBean.getClass();
-        int j=1;
         Iterator<String> keys = item.keys();
         while (keys.hasNext()) {
             String key = keys.next();
-            //Log.i("VALUE::" , "key = " + key + ",value = " + item.get(key));
+
             try{
                 Field[] fields = hBeanCls.getDeclaredFields();
                 for (Field field : fields){
+                    String fieldName = field.getName();
                     field.setAccessible(true);
-                    if(key.equals(field.getName())) {
+
+                    if(key.toUpperCase().equals(fieldName.toUpperCase())) {
                         Method[] methods = hBeanCls.getMethods();
+
                         for(Method method : methods){
-                            if(method.getName().substring(0, 3).equals("set")){
-                                if(method.getName().toUpperCase().equals(("set"+field.getName()).toUpperCase())){
+                            String methodName = method.getName();
+
+                            if(methodName.substring(0, 3).equals("set")){
+
+                                if(methodName.toUpperCase().equals(("set"+fieldName).toUpperCase())){
                                     method.setAccessible(true);
 
                                     try {
@@ -94,14 +99,19 @@ public class HospitalInfoApiClient {
                                     method.setAccessible(false);
                                     break;
                                 }
+
                             }
+
                         }
                         break;
+
                     }
+
                 }
             }catch (Exception e){
                 e.printStackTrace();
             }
+
         }
 
         return hBean;
