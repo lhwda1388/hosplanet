@@ -28,7 +28,6 @@ public class HospitalInfoApiClient {
         List hostPitalList = null;
         HospitalInfoApiBean hBean = new HospitalInfoApiBean();
 
-
         String urlString = HospitalInfoApiBean.apiUrl;
         StringBuilder urlBuilder = new StringBuilder(urlString);
 
@@ -51,6 +50,7 @@ public class HospitalInfoApiClient {
         Log.i("URL", urlBuilder.toString());
         return HttpUtil.getHttpUrlData(urlBuilder.toString());
     }
+
     private void appendString(StringBuilder builder, String key, Object value, String charset, String prepend) throws UnsupportedEncodingException {
         String enCodeValue = null;
         if(value != null) {
@@ -62,12 +62,13 @@ public class HospitalInfoApiClient {
                 enCodeValue = (String) value;
             }
         }
+
         if(!TextUtils.isEmpty(enCodeValue)){
             builder.append(prepend + URLEncoder.encode(key, charset) + "=" + URLEncoder.encode(enCodeValue, charset));
         }
     }
-    public static HospitalInfoApiBean getJObjectFromHBean(JSONObject item) throws JSONException, ClassNotFoundException {
 
+    public static HospitalInfoApiBean getJObjectFromHBean(JSONObject item) throws JSONException, ClassNotFoundException {
         HospitalInfoApiBean hBean = new HospitalInfoApiBean();
         Class hBeanCls = hBean.getClass();
         if(item == null) return hBean;
@@ -80,9 +81,7 @@ public class HospitalInfoApiClient {
 
                 for(Method method : methods){
                     String methodName = method.getName();
-
                     if(methodName.substring(0, 3).equals("set")){
-
                         if(methodName.toUpperCase().equals(("set"+key).toUpperCase())){
                             method.setAccessible(true);
 
@@ -95,15 +94,11 @@ public class HospitalInfoApiClient {
                             method.setAccessible(false);
                             break;
                         }
-
                     }
-
                 }
-
             }catch (Exception e){
                 e.printStackTrace();
             }
-
         }
 
         return hBean;
