@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
     private HospitalListAdapter hospitalListAdapter;
     private SearchView searchView;
     private Button btnAllList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
 
         searchView = (SearchView)findViewById(R.id.searchView);
         searchView.setQueryHint(getString(R.string.searchVIewHint));
-        searchView.setQuery("가톨릭대학교인천성모병원", true);
+        //searchView.setQuery("가톨릭대학교인천성모병원", true);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -61,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
         btnAllList.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                searchView.setQuery("", false);
                 mainPresenter.getList(null);
             }
         });
@@ -75,11 +77,10 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
         }else{
             hospitalInfoApiBean.setYadmnm(null);
         }
+
         HospitalInfoAsyncTask h = new HospitalInfoAsyncTask(new AsyncResponse(){
             @Override
             public void processFinish(JSONObject jsonObject) throws Exception {
-
-
                 JSONObject header = jsonObject.getJSONObject("response").getJSONObject("header");
                 String resCode  = header.get("resultCode").toString();
                 String resMsg = header.get("resultMsg").toString();
@@ -93,7 +94,6 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
                     }else{
                         jsonArray = items.optJSONArray("item");
                     }
-
 
                     String numOfRows = body.get("numOfRows").toString();
                     String pageNo = body.get("pageNo").toString();
@@ -121,20 +121,18 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
                     hosListView.setOnItemClickListener(new ListView.OnItemClickListener(){
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
                             HospitalInfoApiBean hBean = hospitalListAdapter.getItem(position);
                             Intent intent = new Intent(MainActivity.this, HosMainActivity.class);
                             intent.putExtra("com.hoplanet.yadmNm", hBean.getYadmnm());
                             intent.putExtra("com.hoplanet.clCd", hBean.getClCd());
+                            intent.putExtra("com.hoplanet.addr", hBean.getAddr());
+                            intent.putExtra("com.hoplanet.clCdNm", hBean.getClCdNm());
                             startActivity(intent);
                         }
                     });
-
                 }else{
                     Toast.makeText(getApplicationContext(), resMsg, Toast.LENGTH_LONG).show();
-
                 }
-
             }
         });
         h.execute(hospitalInfoApiBean);

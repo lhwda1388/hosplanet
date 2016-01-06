@@ -65,7 +65,6 @@ public class HospitalListAdapter extends ArrayAdapter<HospitalInfoApiBean>{
                 Log.i("CLICKURL", getItem(position).getHospUrl());
                 mainPresenter.goUrl(getItem(position).getHospUrl());
             }
-
         });
 
         return v;
