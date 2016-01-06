@@ -61,10 +61,13 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
 
         searchView = (SearchView)findViewById(R.id.searchView);
         searchView.setQueryHint(getString(R.string.searchVIewHint));
-        //searchView.setQuery("가톨릭대학교인천성모병원", true);
+        searchView.setQuery("대", true);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                hosListView = (ListView)findViewById(R.id.hosListView);
+                hospitalListAdapter = new HospitalListAdapter(getApplicationContext(),R.layout.hoslist_info);
+                hosListView.setAdapter(hospitalListAdapter);
                 HospitalInfoApiBean hBean = new HospitalInfoApiBean();
                 hBean.setYadmnm(query);
                 hBean.setPageNo(1);
