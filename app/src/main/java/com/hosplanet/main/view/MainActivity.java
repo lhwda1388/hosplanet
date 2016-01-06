@@ -69,8 +69,9 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
                 hospitalListAdapter = new HospitalListAdapter(getApplicationContext(),R.layout.hoslist_info);
                 hosListView.setAdapter(hospitalListAdapter);
                 HospitalInfoApiBean hBean = new HospitalInfoApiBean();
+                paramPageNo = 1;
                 hBean.setYadmnm(query);
-                hBean.setPageNo(1);
+                hBean.setPageNo(paramPageNo);
                 Log.i("Query: ", query);
                 mainPresenter.getList(hBean);
                 return true;
