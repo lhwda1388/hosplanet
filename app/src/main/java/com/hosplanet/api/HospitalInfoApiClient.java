@@ -32,7 +32,7 @@ public class HospitalInfoApiClient {
         StringBuilder urlBuilder = new StringBuilder(urlString);
 
         urlBuilder.append("?" + URLEncoder.encode("ServiceKey", "UTF-8") + "=" + HospitalInfoApiBean.serviceKey);
-        appendString(urlBuilder, "_type", "json" ,"UTF-8" ,"&");
+        appendString(urlBuilder, "_type", "json", "UTF-8", "&");
         appendString(urlBuilder, "pageNo", hospitalInfoApiBean.getPageNo() ,"UTF-8" ,"&");
         appendString(urlBuilder, "numOfRows", hospitalInfoApiBean.getNumOfRows() ,"UTF-8" ,"&");
         appendString(urlBuilder, "sidoCd", hospitalInfoApiBean.getSidoCd() ,"UTF-8" ,"&");

@@ -25,9 +25,9 @@ public class MainPresenterImpl implements MainPresenter {
     }
 
     @Override
-    public void getList(Object object) {
+    public void getList(HospitalInfoApiBean hospitalInfoApiBean) {
         if(view != null) {
-            view.getList(object);
+            view.getList(hospitalInfoApiBean);
         }
     }
 
