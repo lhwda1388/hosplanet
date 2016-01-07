@@ -20,9 +20,12 @@ import com.hosplanet.hosinfo.presenter.HosMainPresenterImpl;
 
 import org.json.JSONObject;
 
+import net.daum.android.map.MapViewEventListener;
+import net.daum.mf.map.api.MapPOIItem;
+import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
 
-public class HosMainActivity extends AppCompatActivity implements HosMainPresenter.View {
+public class HosMainActivity extends AppCompatActivity implements HosMainPresenter.View{
     private HosMainPresenter hosMainPresenter;
     private TextView hosInfoName;
     private TextView hosInfoType;
@@ -37,6 +40,7 @@ public class HosMainActivity extends AppCompatActivity implements HosMainPresent
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hos_main);
+
         hosInfoName = (TextView)findViewById(R.id.hosInfoName);
         hosInfoType = (TextView)findViewById(R.id.hosInfos);
         hosInfoAddr = (TextView)findViewById(R.id.hosInfoAddr);
@@ -127,8 +131,44 @@ public class HosMainActivity extends AppCompatActivity implements HosMainPresent
     public void callMapView(HospitalInfoApiBean hospitalInfoApiBean) {
         MapView mapView = new MapView(this);
         mapView.setDaumMapApiKey(CommonUtil.mapApiKey);
+        mapView.setMapViewEventListener(new MapViewEventListener() {
+            @Override
+            public void onLoadMapView() {
+
+            }
+        }); // this에 MapView.MapViewEventListener 구현.
+        mapView.setPOIItemEventListener(new MapView.POIItemEventListener() {
+            @Override
+            public void onPOIItemSelected(MapView mapView, MapPOIItem mapPOIItem) {
+
+            }
+
+            @Override
+            public void onCalloutBalloonOfPOIItemTouched(MapView mapView, MapPOIItem mapPOIItem) {
+
+            }
+
+            @Override
+            public void onCalloutBalloonOfPOIItemTouched(MapView mapView, MapPOIItem mapPOIItem, MapPOIItem.CalloutBalloonButtonType calloutBalloonButtonType) {
+
+            }
+
+            @Override
+            public void onDraggablePOIItemMoved(MapView mapView, MapPOIItem mapPOIItem, MapPoint mapPoint) {
+
+            }
+        });
+        // 중심점 변경
+        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(hospitalInfoApiBean.getyPos(), hospitalInfoApiBean.getxPos()), true);
+        // 중심점 변경 + 줌 레벨 변경
+        mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(hospitalInfoApiBean.getyPos(), hospitalInfoApiBean.getxPos()), 9, true);
+        // 줌 인
+        mapView.zoomIn(true);
+        // 줌 아웃
+        mapView.zoomOut(true);
 
         ViewGroup mapViewContainer = (ViewGroup) findViewById(R.id.map_view);
         mapViewContainer.addView(mapView);
     }
+
 }
