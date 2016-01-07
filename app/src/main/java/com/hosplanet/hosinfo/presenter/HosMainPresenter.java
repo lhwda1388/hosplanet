@@ -10,8 +10,10 @@ public interface HosMainPresenter {
     void setView(HosMainPresenter.View view);
 
     void getInfo(HospitalInfoApiBean hospitalInfoApiBean);
+    void callMapView(HospitalInfoApiBean hospitalInfoApiBean);
     public interface View {
         void getInfo(HospitalInfoApiBean hospitalInfoApiBean);
+        void callMapView(HospitalInfoApiBean hospitalInfoApiBean);
     }
 }
 

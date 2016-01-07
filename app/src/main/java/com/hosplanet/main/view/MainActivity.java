@@ -126,6 +126,8 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
                 intent.putExtra("com.hoplanet.clCd", hBean.getClCd());
                 intent.putExtra("com.hoplanet.addr", hBean.getAddr());
                 intent.putExtra("com.hoplanet.clCdNm", hBean.getClCdNm());
+                intent.putExtra("com.hoplanet.xPos", hBean.getxPos());
+                intent.putExtra("com.hoplanet.yPos", hBean.getyPos());
 
                 startActivity(intent);
             }

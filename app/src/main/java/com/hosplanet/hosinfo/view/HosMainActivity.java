@@ -3,8 +3,8 @@ package com.hosplanet.hosinfo.view;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -14,13 +14,13 @@ import com.hosplanet.R;
 import com.hosplanet.api.AsyncResponse;
 import com.hosplanet.api.HospitalInfoApiBean;
 import com.hosplanet.api.HospitalInfoAsyncTask;
+import com.hosplanet.common.util.CommonUtil;
 import com.hosplanet.hosinfo.presenter.HosMainPresenter;
 import com.hosplanet.hosinfo.presenter.HosMainPresenterImpl;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.hosplanet.main.presenter.MainPresenter;
+import net.daum.mf.map.api.MapView;
 
 public class HosMainActivity extends AppCompatActivity implements HosMainPresenter.View {
     private HosMainPresenter hosMainPresenter;
@@ -53,6 +53,8 @@ public class HosMainActivity extends AppCompatActivity implements HosMainPresent
         String addr = intent.getStringExtra("com.hoplanet.addr");
         String hospUrl = intent.getStringExtra("com.hoplanet.hospUrl");
         String telno = intent.getStringExtra("com.hoplanet.telno");
+        Double xPos= intent.getDoubleExtra("com.hoplanet.xPos", 0);
+        Double yPos= intent.getDoubleExtra("com.hoplanet.yPos", 0);
 
         hBean.setYadmnm(yadmNm);
         hBean.setClCd(clCd);
@@ -60,19 +62,13 @@ public class HosMainActivity extends AppCompatActivity implements HosMainPresent
         hBean.setAddr(addr);
         hBean.setHospUrl(hospUrl);
         hBean.setTelno(telno);
+        hBean.setxPos(xPos);
+        hBean.setyPos(yPos);
 
         hosMainPresenter.getInfo(hBean);
-
-        // Android에서 제공하는 string 문자열 하나를 출력 가능한 layout으로 어댑터 생성
         m_Adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1);
-
-        // Xml에서 추가한 ListView 연결
         m_ListView = (ListView) findViewById(R.id.reviewList);
-
-        // ListView에 어댑터 연결
         m_ListView.setAdapter(m_Adapter);
-
-        // ListView에 아이템 추가
         m_Adapter.add("하스스톤");
         m_Adapter.add("몬스터 헌터");
         m_Adapter.add("디아블로");
@@ -80,6 +76,8 @@ public class HosMainActivity extends AppCompatActivity implements HosMainPresent
         m_Adapter.add("리니지");
         m_Adapter.add("안드로이드");
         m_Adapter.add("아이폰");
+
+        hosMainPresenter.callMapView(hBean);
     }
 
     @Override
@@ -123,5 +121,14 @@ public class HosMainActivity extends AppCompatActivity implements HosMainPresent
         });
         hTask.execute(hospitalInfoApiBean);
 
+    }
+
+    @Override
+    public void callMapView(HospitalInfoApiBean hospitalInfoApiBean) {
+        MapView mapView = new MapView(this);
+        mapView.setDaumMapApiKey(CommonUtil.mapApiKey);
+
+        ViewGroup mapViewContainer = (ViewGroup) findViewById(R.id.map_view);
+        mapViewContainer.addView(mapView);
     }
 }

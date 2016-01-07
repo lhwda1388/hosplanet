@@ -26,4 +26,11 @@ public class HosMainPresenterImpl implements HosMainPresenter {
             view.getInfo(hospitalInfoApiBean);
         }
     }
+
+    @Override
+    public void callMapView(HospitalInfoApiBean hospitalInfoApiBean) {
+        if(view != null){
+            view.callMapView(hospitalInfoApiBean);
+        }
+    }
 }

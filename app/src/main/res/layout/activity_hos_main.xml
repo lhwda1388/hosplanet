@@ -111,5 +111,11 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/writeArea" />
+
+        <RelativeLayout
+            android:layout_below="@+id/reviewList"
+            android:id="@+id/map_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </RelativeLayout>
 </RelativeLayout>
