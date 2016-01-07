@@ -23,9 +23,11 @@ import java.util.List;
 public class HospitalListAdapter extends ArrayAdapter<HospitalInfoApiBean>{
     List<HospitalInfoApiBean> list = new ArrayList<HospitalInfoApiBean>();
     MainPresenter mainPresenter  = null;
+
     public HospitalListAdapter(Context context, int resource) {
         super(context, resource);
     }
+
     public void setMainPresenter(MainPresenter mainPresenter){
         this.mainPresenter = mainPresenter;
     }
@@ -62,7 +64,6 @@ public class HospitalListAdapter extends ArrayAdapter<HospitalInfoApiBean>{
         hosUrl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("CLICKURL", getItem(position).getHospUrl());
                 mainPresenter.goUrl(getItem(position).getHospUrl());
             }
         });

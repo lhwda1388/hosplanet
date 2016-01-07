@@ -47,11 +47,12 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         paramPageNo = 1;
-        hosListView = (ListView)findViewById(R.id.hosListView);
         hospitalListAdapter = new HospitalListAdapter(getApplicationContext(),R.layout.hoslist_info);
-        hosListView.setAdapter(hospitalListAdapter);
         footerInflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        hosListView.addFooterView(footerInflater.inflate(R.layout.footer,null));
+        hosListView = (ListView)findViewById(R.id.hosListView);
+        hosListView.setAdapter(hospitalListAdapter);
+        hosListView.addFooterView(footerInflater.inflate(R.layout.footer, null));
+
 
         HospitalInfoApiBean hBean = new HospitalInfoApiBean();
         hBean.setPageNo(1);
@@ -65,14 +66,15 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                hosListView = (ListView)findViewById(R.id.hosListView);
-                hospitalListAdapter = new HospitalListAdapter(getApplicationContext(),R.layout.hoslist_info);
-                hosListView.setAdapter(hospitalListAdapter);
-                HospitalInfoApiBean hBean = new HospitalInfoApiBean();
                 paramPageNo = 1;
+                hospitalListAdapter = new HospitalListAdapter(getApplicationContext(), R.layout.hoslist_info);
+                hosListView = (ListView) findViewById(R.id.hosListView);
+                hosListView.setAdapter(hospitalListAdapter);
+
+                HospitalInfoApiBean hBean = new HospitalInfoApiBean();
                 hBean.setYadmnm(query);
                 hBean.setPageNo(paramPageNo);
-                Log.i("Query: ", query);
+
                 mainPresenter.getList(hBean);
                 return true;
             }
@@ -87,31 +89,47 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
         btnAllList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                searchView.setQuery("", false);
                 HospitalInfoApiBean hBean = new HospitalInfoApiBean();
                 hBean.setPageNo(1);
+                searchView.setQuery("", false);
+
                 mainPresenter.getList(hBean);
             }
         });
          hosListView.setOnScrollListener(new AbsListView.OnScrollListener() {
-                @Override
-                public void onScrollStateChanged(AbsListView view, int scrollState) {
+             @Override
+             public void onScrollStateChanged(AbsListView view, int scrollState) {
 
-                }
+             }
 
-                @Override
-                public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                    scrollLock = true;
-                    int count = totalItemCount - visibleItemCount;
+             @Override
+             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                 int count = totalItemCount - visibleItemCount;
 
-                    if (totalItemCount != 0 && ((firstVisibleItem + visibleItemCount) >= totalItemCount-1) && firstVisibleItem >= count && listLock == false) {
-                        HospitalInfoApiBean hospitalInfoApiBean = new HospitalInfoApiBean();
-                        hospitalInfoApiBean.setPageNo(++paramPageNo);
-                        if(searchView.getQuery() != null)  hospitalInfoApiBean.setYadmnm(searchView.getQuery().toString());
-                        addItems(hospitalInfoApiBean);
-                    }
-                }
-            });
+                 if (totalItemCount != 0 && ((firstVisibleItem + visibleItemCount) >= totalItemCount - 1) && firstVisibleItem >= count && listLock == false) {
+                     HospitalInfoApiBean hospitalInfoApiBean = new HospitalInfoApiBean();
+                     hospitalInfoApiBean.setPageNo(++paramPageNo);
+                     if (searchView.getQuery() != null)
+                         hospitalInfoApiBean.setYadmnm(searchView.getQuery().toString());
+
+                     addItems(hospitalInfoApiBean);
+                 }
+             }
+         });
+        hosListView.setOnItemClickListener(new ListView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                HospitalInfoApiBean hBean = hospitalListAdapter.getItem(position);
+
+                Intent intent = new Intent(MainActivity.this, HosMainActivity.class);
+                intent.putExtra("com.hoplanet.yadmNm", hBean.getYadmnm());
+                intent.putExtra("com.hoplanet.clCd", hBean.getClCd());
+                intent.putExtra("com.hoplanet.addr", hBean.getAddr());
+                intent.putExtra("com.hoplanet.clCdNm", hBean.getClCdNm());
+
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -157,18 +175,6 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
 
                     }
 
-                    hosListView.setOnItemClickListener(new ListView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            HospitalInfoApiBean hBean = hospitalListAdapter.getItem(position);
-                            Intent intent = new Intent(MainActivity.this, HosMainActivity.class);
-                            intent.putExtra("com.hoplanet.yadmNm", hBean.getYadmnm());
-                            intent.putExtra("com.hoplanet.clCd", hBean.getClCd());
-                            intent.putExtra("com.hoplanet.addr", hBean.getAddr());
-                            intent.putExtra("com.hoplanet.clCdNm", hBean.getClCdNm());
-                            startActivity(intent);
-                        }
-                    });
                 }else{
                     Toast.makeText(getApplicationContext(), resMsg, Toast.LENGTH_LONG).show();
                 }
@@ -179,7 +185,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
 
     @Override
     public void goUrl(String url) {
-        Log.i("MAINGOURL", url);
+
         if(url.equals("") || url == null){
             Toast.makeText(getApplicationContext(),"NOT FOUND URL.",Toast.LENGTH_LONG).show();
         }else{
@@ -190,18 +196,18 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
     }
 
     private void addItems(final HospitalInfoApiBean hBean){
+        listLock = true;
         final ProgressDialog dialog = new ProgressDialog(this);
         dialog.setTitle("Loading");
         dialog.setMessage("Wait while loading....");
-        listLock = true;
+
         Runnable run = new Runnable() {
             @Override
             public synchronized void run() {
-
                 mainPresenter.getList(hBean);
-
                 hospitalListAdapter.notifyDataSetChanged();
                 listLock = false;
+
                 dialog.dismiss();
             }
         };

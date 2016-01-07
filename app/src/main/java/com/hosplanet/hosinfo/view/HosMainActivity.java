@@ -87,15 +87,17 @@ public class HosMainActivity extends AppCompatActivity implements HosMainPresent
         HospitalInfoAsyncTask hTask = new HospitalInfoAsyncTask(new AsyncResponse() {
             @Override
             public void processFinish(JSONObject jsonObject) throws Exception {
-                Log.i("INFO", jsonObject.toString());
+
                 JSONObject header = jsonObject.getJSONObject("response").getJSONObject("header");
                 String resCode  = header.get("resultCode").toString();
                 String resMsg = header.get("resultMsg").toString();
-                Log.i("JSONOBJECT", jsonObject.toString());
+
                 if("00".equals(resCode)) {
+
                     JSONObject body = jsonObject.optJSONObject("response").optJSONObject("body");
                     JSONObject items = body.optJSONObject("items");
                     JSONObject item = null;
+
                     if (items == null) {
                         Toast.makeText(getApplicationContext(), R.string.noList, Toast.LENGTH_LONG).show();
                     } else {
