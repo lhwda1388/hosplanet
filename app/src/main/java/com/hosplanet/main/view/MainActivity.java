@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
         hosListView.setAdapter(hospitalListAdapter);
         hosListView.addFooterView(footerInflater.inflate(R.layout.footer, null));
 
-
+        Log.i("packageName", getPackageName());
         HospitalInfoApiBean hBean = new HospitalInfoApiBean();
         hBean.setPageNo(1);
         mainPresenter = new MainPresenterImpl(MainActivity.this);

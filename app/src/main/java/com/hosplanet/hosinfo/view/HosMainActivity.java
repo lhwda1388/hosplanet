@@ -3,6 +3,8 @@ package com.hosplanet.hosinfo.view;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -17,24 +19,27 @@ import com.hosplanet.api.HospitalInfoAsyncTask;
 import com.hosplanet.common.util.CommonUtil;
 import com.hosplanet.hosinfo.presenter.HosMainPresenter;
 import com.hosplanet.hosinfo.presenter.HosMainPresenterImpl;
+import com.nhn.android.maps.NMapActivity;
+import com.nhn.android.maps.NMapController;
+import com.nhn.android.maps.NMapView;
+import com.nhn.android.maps.maplib.NGeoPoint;
+import com.nhn.android.maps.nmapmodel.NMapError;
 
 import org.json.JSONObject;
 
-import net.daum.android.map.MapViewEventListener;
-import net.daum.mf.map.api.MapPOIItem;
-import net.daum.mf.map.api.MapPoint;
-import net.daum.mf.map.api.MapView;
 
-public class HosMainActivity extends AppCompatActivity implements HosMainPresenter.View{
+
+public class HosMainActivity extends NMapActivity implements HosMainPresenter.View {
     private HosMainPresenter hosMainPresenter;
     private TextView hosInfoName;
     private TextView hosInfoType;
     private TextView hosInfoAddr;
     private TextView hosInfoUrl;
     private TextView hosInfoTell;
-
     private ListView m_ListView;
     private ArrayAdapter<String> m_Adapter;
+    private NMapView nMapView;
+    private NMapController nMapController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,7 +112,7 @@ public class HosMainActivity extends AppCompatActivity implements HosMainPresent
                         hosInfoName.setText(item.getString("yadmNm"));
                         hosInfoType.setText(item.getString("clCdNm"));
                         hosInfoAddr.setText(item.getString("addr"));
-                        hosInfoUrl.setText(item.getString("hospUrl"));
+                        hosInfoUrl.setText(CommonUtil.sNullChk(item.optString("hospUrl"), ""));
                         hosInfoTell.setText(item.getString("telno"));
 
                         hosInfoUrl.setOnClickListener(new View.OnClickListener() {
@@ -128,47 +133,82 @@ public class HosMainActivity extends AppCompatActivity implements HosMainPresent
     }
 
     @Override
-    public void callMapView(HospitalInfoApiBean hospitalInfoApiBean) {
-        MapView mapView = new MapView(this);
-        mapView.setDaumMapApiKey(CommonUtil.mapApiKey);
-        mapView.setMapViewEventListener(new MapViewEventListener() {
+    public void callMapView(final HospitalInfoApiBean hospitalInfoApiBean) {
+        // create map view
+        nMapView = (NMapView)findViewById(R.id.map_view);
+        nMapController = nMapView.getMapController();
+        nMapView.setApiKey(CommonUtil.mapApiKey);
+        // initialize map view
+        nMapView.setClickable(true);
+        nMapView.setEnabled(true);
+        nMapView.setFocusable(true);
+        nMapView.setFocusableInTouchMode(true);
+        nMapView.requestFocus();
+
+
+        nMapView.setOnMapStateChangeListener(new NMapView.OnMapStateChangeListener() {
             @Override
-            public void onLoadMapView() {
+            public void onMapInitHandler(NMapView nMapView, NMapError nMapError) {
+                if (nMapError == null) { // success
+                    Log.i("SUCESSS???????","SUCESSS???????");
+                    nMapController.setMapCenter(new NGeoPoint(hospitalInfoApiBean.getyPos(), hospitalInfoApiBean.getxPos()), 11);
+                } else { // fail
+                    Log.e("HosMainActivity", "onMapInitHandler: error=" + nMapError.toString());
+                }
+            }
+
+            @Override
+            public void onMapCenterChange(NMapView nMapView, NGeoPoint nGeoPoint) {
 
             }
-        }); // this에 MapView.MapViewEventListener 구현.
-        mapView.setPOIItemEventListener(new MapView.POIItemEventListener() {
+
             @Override
-            public void onPOIItemSelected(MapView mapView, MapPOIItem mapPOIItem) {
+            public void onMapCenterChangeFine(NMapView nMapView) {
 
             }
 
             @Override
-            public void onCalloutBalloonOfPOIItemTouched(MapView mapView, MapPOIItem mapPOIItem) {
+            public void onZoomLevelChange(NMapView nMapView, int i) {
 
             }
 
             @Override
-            public void onCalloutBalloonOfPOIItemTouched(MapView mapView, MapPOIItem mapPOIItem, MapPOIItem.CalloutBalloonButtonType calloutBalloonButtonType) {
-
-            }
-
-            @Override
-            public void onDraggablePOIItemMoved(MapView mapView, MapPOIItem mapPOIItem, MapPoint mapPoint) {
+            public void onAnimationStateChange(NMapView nMapView, int i, int i1) {
 
             }
         });
-        // 중심점 변경
-        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(hospitalInfoApiBean.getyPos(), hospitalInfoApiBean.getxPos()), true);
-        // 중심점 변경 + 줌 레벨 변경
-        mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(hospitalInfoApiBean.getyPos(), hospitalInfoApiBean.getxPos()), 9, true);
-        // 줌 인
-        mapView.zoomIn(true);
-        // 줌 아웃
-        mapView.zoomOut(true);
 
-        ViewGroup mapViewContainer = (ViewGroup) findViewById(R.id.map_view);
-        mapViewContainer.addView(mapView);
+        nMapView.setOnMapViewTouchEventListener(new NMapView.OnMapViewTouchEventListener() {
+            @Override
+            public void onLongPress(NMapView nMapView, MotionEvent motionEvent) {
+
+            }
+
+            @Override
+            public void onLongPressCanceled(NMapView nMapView) {
+
+            }
+
+            @Override
+            public void onTouchDown(NMapView nMapView, MotionEvent motionEvent) {
+
+            }
+
+            @Override
+            public void onTouchUp(NMapView nMapView, MotionEvent motionEvent) {
+
+            }
+
+            @Override
+            public void onScroll(NMapView nMapView, MotionEvent motionEvent, MotionEvent motionEvent1) {
+
+            }
+
+            @Override
+            public void onSingleTapUp(NMapView nMapView, MotionEvent motionEvent) {
+
+            }
+        });
     }
 
 }
