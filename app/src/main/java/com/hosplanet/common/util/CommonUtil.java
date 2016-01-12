@@ -6,7 +6,7 @@ import android.text.TextUtils;
  * Created by hyunwoo-Lee on 2015. 12. 20..
  */
 public class CommonUtil {
-    public static String mapApiKey = "";
+    public static String mapApiKey = "31080f4b15e2209f2f76263835f74c75";
 
     public static String sNullChk(String str, String defaultVal){
         String retVal = "";

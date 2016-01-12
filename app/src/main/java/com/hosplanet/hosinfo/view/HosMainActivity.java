@@ -1,12 +1,10 @@
 package com.hosplanet.hosinfo.view;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -19,6 +17,7 @@ import com.hosplanet.api.HospitalInfoAsyncTask;
 import com.hosplanet.common.util.CommonUtil;
 import com.hosplanet.hosinfo.presenter.HosMainPresenter;
 import com.hosplanet.hosinfo.presenter.HosMainPresenterImpl;
+
 import com.nhn.android.maps.NMapActivity;
 import com.nhn.android.maps.NMapController;
 import com.nhn.android.maps.NMapView;
@@ -145,13 +144,12 @@ public class HosMainActivity extends NMapActivity implements HosMainPresenter.Vi
         nMapView.setFocusableInTouchMode(true);
         nMapView.requestFocus();
 
-
         nMapView.setOnMapStateChangeListener(new NMapView.OnMapStateChangeListener() {
             @Override
             public void onMapInitHandler(NMapView nMapView, NMapError nMapError) {
                 if (nMapError == null) { // success
                     Log.i("SUCESSS???????","SUCESSS???????");
-                    nMapController.setMapCenter(new NGeoPoint(hospitalInfoApiBean.getyPos(), hospitalInfoApiBean.getxPos()), 11);
+                    nMapController.setMapCenter(new NGeoPoint(hospitalInfoApiBean.getxPos(), hospitalInfoApiBean.getyPos()), 20);
                 } else { // fail
                     Log.e("HosMainActivity", "onMapInitHandler: error=" + nMapError.toString());
                 }
