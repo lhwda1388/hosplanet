@@ -44,6 +44,7 @@ public class HosMainActivity extends NMapActivity implements HosMainPresenter.Vi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hos_main);
+        CommonUtil.contextObj = this;
 
         hosInfoName = (TextView)findViewById(R.id.hosInfoName);
         hosInfoType = (TextView)findViewById(R.id.hosInfos);
@@ -72,6 +73,7 @@ public class HosMainActivity extends NMapActivity implements HosMainPresenter.Vi
         hBean.setTelno(telno);
         hBean.setxPos(xPos);
         hBean.setyPos(yPos);
+
 
         hosMainPresenter.getInfo(hBean);
         m_Adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1);

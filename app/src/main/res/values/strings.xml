@@ -2,4 +2,7 @@
     <string name="app_name">Hosplanet</string>
     <string name="searchVIewHint">병원이름을 입력해주세요.</string>
     <string name="noList">데이터가 없습니다.</string>
+    <string name="hospApiKey">lPkrRQTtBJ3eGxXVhvEP1Lt1Q26kN0MMWHeAFBxsg0yuZQYiM95CpqYKdnWV4dsjUAiVQ9aGBF8H%2BUZrrHJt%2BQ%3D%3D</string>
+    <string name="mapApiKey">31080f4b15e2209f2f76263835f74c75</string>
+    <string name="hospApiUrl">http://openapi.hira.or.kr/openapi/service/hospInfoService/getHospBasisList</string>
 </resources>

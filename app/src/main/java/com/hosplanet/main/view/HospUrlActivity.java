@@ -10,6 +10,7 @@ import android.webkit.WebViewClient;
 import android.widget.Button;
 
 import com.hosplanet.R;
+import com.hosplanet.common.util.CommonUtil;
 import com.hosplanet.main.presenter.HospUrlPresenter;
 import com.hosplanet.main.presenter.HospUrlPresenterImpl;
 
@@ -20,7 +21,7 @@ public class HospUrlActivity extends AppCompatActivity implements HospUrlPresent
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hosp_url);
-
+        CommonUtil.contextObj = this;
         button = (Button)findViewById(R.id.btnExit);
         hospUrlPresenter = new HospUrlPresenterImpl(HospUrlActivity.this);
         hospUrlPresenter.setView(this);

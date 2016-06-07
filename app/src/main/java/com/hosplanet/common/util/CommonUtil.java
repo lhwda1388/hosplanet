@@ -1,12 +1,19 @@
 package com.hosplanet.common.util;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.text.TextUtils;
+import android.util.Log;
+
+import com.hosplanet.R;
 
 /**
  * Created by hyunwoo-Lee on 2015. 12. 20..
  */
 public class CommonUtil {
-    public static String mapApiKey = "";
+    public static Context contextObj = null;
+    public static String mapApiKey = getString(R.string.mapApiKey);
+
 
     public static String sNullChk(String str, String defaultVal){
         String retVal = "";
@@ -41,4 +48,10 @@ public class CommonUtil {
         String res = str.substring(0,1).toUpperCase() + str.substring(1).toLowerCase();
         return res;
     }
+
+    public static String getString(int id){
+
+        return contextObj.getString(id);
+    }
+
 }

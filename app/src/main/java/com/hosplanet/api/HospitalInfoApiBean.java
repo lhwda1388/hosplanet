@@ -1,12 +1,18 @@
 package com.hosplanet.api;
 
+
+import android.content.res.Resources;
+
+import com.hosplanet.R;
+import com.hosplanet.common.util.CommonUtil;
+
 /**
  * Created by hyunwoo-Lee on 2015-12-16.
  */
 public class HospitalInfoApiBean{
 
-    public static final String serviceKey = "";
-    public static final String apiUrl = "http://openapi.hira.or.kr/openapi/service/hospInfoService/getHospBasisList"; //https://www.data.go.kr/ 공공데이터 포탈
+    public static final String serviceKey = CommonUtil.getString(R.string.hospApiKey);
+    public static final String apiUrl =  CommonUtil.getString(R.string.hospApiUrl) ; //https://www.data.go.kr/ 공공데이터 포탈
     private String type;
     private Integer pageNo = 1;          //페이지번호 in,out
     private Integer numOfRows = 10;     //한페이지 결과수 in ,검색건수 out
