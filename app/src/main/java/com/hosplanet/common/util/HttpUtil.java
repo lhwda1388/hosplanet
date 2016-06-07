@@ -1,5 +1,7 @@
 package com.hosplanet.common.util;
 
+import android.text.TextUtils;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -8,10 +10,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.net.URLEncoder;
 
 /**
  * Created by hyunwoo-Lee on 2015-12-18.
@@ -70,5 +74,23 @@ public class HttpUtil {
             }
         }
         return sb.toString();
+    }
+
+
+    public static void appendString(StringBuilder builder, String key, Object value, String charset, String prepend) throws UnsupportedEncodingException {
+        String enCodeValue = null;
+        if(value != null) {
+            if (value instanceof Integer) {
+                enCodeValue = Integer.toString(((Integer) value).intValue());
+            } else if (value instanceof Double) {
+                enCodeValue = Double.toString(((Double) value).doubleValue());
+            } else {
+                enCodeValue = (String) value;
+            }
+        }
+
+        if(!TextUtils.isEmpty(enCodeValue)){
+            builder.append(prepend + URLEncoder.encode(key, charset) + "=" + URLEncoder.encode(enCodeValue, charset));
+        }
     }
 }

@@ -32,40 +32,23 @@ public class HospitalInfoApiClient {
         StringBuilder urlBuilder = new StringBuilder(urlString);
 
         urlBuilder.append("?" + URLEncoder.encode("ServiceKey", "UTF-8") + "=" + HospitalInfoApiBean.serviceKey);
-        appendString(urlBuilder, "_type", "json", "UTF-8", "&");
-        appendString(urlBuilder, "pageNo", hospitalInfoApiBean.getPageNo() ,"UTF-8" ,"&");
-        appendString(urlBuilder, "numOfRows", hospitalInfoApiBean.getNumOfRows() ,"UTF-8" ,"&");
-        appendString(urlBuilder, "sidoCd", hospitalInfoApiBean.getSidoCd() ,"UTF-8" ,"&");
-        appendString(urlBuilder, "sidoCdNm", hospitalInfoApiBean.getSidoCdNm() ,"UTF-8" ,"&");
-        appendString(urlBuilder, "sgguCd", hospitalInfoApiBean.getSgguCd() ,"UTF-8" ,"&");
-        appendString(urlBuilder, "sgguCdNm", hospitalInfoApiBean.getSgguCdNm() ,"UTF-8" ,"&");
-        appendString(urlBuilder, "emdongNm", hospitalInfoApiBean.getEmdongNm() ,"UTF-8" ,"&");
-        appendString(urlBuilder, "yadmNm", hospitalInfoApiBean.getYadmnm() ,"UTF-8" ,"&");
-        appendString(urlBuilder, "zipCd", hospitalInfoApiBean.getZipCd() ,"UTF-8" ,"&");
-        appendString(urlBuilder, "clCd", hospitalInfoApiBean.getClCd() ,"UTF-8" ,"&");
-        appendString(urlBuilder, "dgsbjtCd", hospitalInfoApiBean.getDgsbjtCd() ,"UTF-8" ,"&");
-        appendString(urlBuilder, "radius", hospitalInfoApiBean.getRadius() ,"UTF-8" ,"&");
-        appendString(urlBuilder, "ykiho", hospitalInfoApiBean.getYkiho() ,"UTF-8" ,"&");
+        HttpUtil.appendString(urlBuilder, "_type", "json", "UTF-8", "&");
+        HttpUtil.appendString(urlBuilder, "pageNo", hospitalInfoApiBean.getPageNo(), "UTF-8", "&");
+        HttpUtil.appendString(urlBuilder, "numOfRows", hospitalInfoApiBean.getNumOfRows(), "UTF-8", "&");
+        HttpUtil.appendString(urlBuilder, "sidoCd", hospitalInfoApiBean.getSidoCd(), "UTF-8", "&");
+        HttpUtil.appendString(urlBuilder, "sidoCdNm", hospitalInfoApiBean.getSidoCdNm(), "UTF-8", "&");
+        HttpUtil.appendString(urlBuilder, "sgguCd", hospitalInfoApiBean.getSgguCd(), "UTF-8", "&");
+        HttpUtil.appendString(urlBuilder, "sgguCdNm", hospitalInfoApiBean.getSgguCdNm(), "UTF-8", "&");
+        HttpUtil.appendString(urlBuilder, "emdongNm", hospitalInfoApiBean.getEmdongNm(), "UTF-8", "&");
+        HttpUtil.appendString(urlBuilder, "yadmNm", hospitalInfoApiBean.getYadmnm(), "UTF-8", "&");
+        HttpUtil.appendString(urlBuilder, "zipCd", hospitalInfoApiBean.getZipCd(), "UTF-8", "&");
+        HttpUtil.appendString(urlBuilder, "clCd", hospitalInfoApiBean.getClCd(), "UTF-8", "&");
+        HttpUtil.appendString(urlBuilder, "dgsbjtCd", hospitalInfoApiBean.getDgsbjtCd(), "UTF-8", "&");
+        HttpUtil.appendString(urlBuilder, "radius", hospitalInfoApiBean.getRadius(), "UTF-8", "&");
+        HttpUtil.appendString(urlBuilder, "ykiho", hospitalInfoApiBean.getYkiho(), "UTF-8", "&");
 
         Log.i("URL", urlBuilder.toString());
         return HttpUtil.getHttpUrlData(urlBuilder.toString());
-    }
-
-    private void appendString(StringBuilder builder, String key, Object value, String charset, String prepend) throws UnsupportedEncodingException {
-        String enCodeValue = null;
-        if(value != null) {
-            if (value instanceof Integer) {
-                enCodeValue = Integer.toString(((Integer) value).intValue());
-            } else if (value instanceof Double) {
-                enCodeValue = Double.toString(((Double) value).doubleValue());
-            } else {
-                enCodeValue = (String) value;
-            }
-        }
-
-        if(!TextUtils.isEmpty(enCodeValue)){
-            builder.append(prepend + URLEncoder.encode(key, charset) + "=" + URLEncoder.encode(enCodeValue, charset));
-        }
     }
 
     public static HospitalInfoApiBean getJObjectFromHBean(JSONObject item) throws JSONException, ClassNotFoundException {
