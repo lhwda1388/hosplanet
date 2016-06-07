@@ -21,7 +21,7 @@ public class HospUrlActivity extends AppCompatActivity implements HospUrlPresent
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hosp_url);
-        CommonUtil.contextObj = this;
+
         button = (Button)findViewById(R.id.btnExit);
         hospUrlPresenter = new HospUrlPresenterImpl(HospUrlActivity.this);
         hospUrlPresenter.setView(this);

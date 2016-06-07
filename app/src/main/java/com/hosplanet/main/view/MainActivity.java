@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        CommonUtil.contextObj = this;
+
         paramPageNo = 1;
         hospitalListAdapter = new HospitalListAdapter(getApplicationContext(),R.layout.hoslist_info);
         footerInflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);

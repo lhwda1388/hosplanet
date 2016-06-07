@@ -6,14 +6,14 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.hosplanet.R;
+import com.hosplanet.main.view.MainActivity;
+
 
 /**
  * Created by hyunwoo-Lee on 2015. 12. 20..
  */
 public class CommonUtil {
-    public static Context contextObj = null;
     public static String mapApiKey = getString(R.string.mapApiKey);
-
 
     public static String sNullChk(String str, String defaultVal){
         String retVal = "";
@@ -49,9 +49,10 @@ public class CommonUtil {
         return res;
     }
 
-    public static String getString(int id){
-
-        return contextObj.getString(id);
+    public static  String getString(int id){
+        String s = Resources.getSystem().getString(id);
+        Log.i("SSSSSSSSSSSSSSSSSS: " , s);
+        return "";
     }
 
 }
